@@ -20,7 +20,7 @@ async function writeDataToSheet(auth) {
 
 	// Specify the spreadsheet ID and range.
 	const spreadsheetId = "1f597ZHCsCWQMpD8WjojGTc4v9iM8QXC-0Ha_x8zDWk0";
-	const range = "Sheet1!A1:B2";
+	const range = "Sheet1!A1:E17";
 
 	// Specify the values to write.
 	const values = [
@@ -51,7 +51,7 @@ async function writeDataToSheet(auth) {
 				range: range,
 			})
 			.then(response => {
-				console.log(response.data.values);
+				console.log(response.data.values, response.data.values.length);
 			});
 		console.log("data captured");
 	} catch (error) {
