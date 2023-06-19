@@ -43,4 +43,18 @@ async function writeDataToSheet(auth) {
 	} catch (err) {
 		console.error("Error writing data:", err);
 	}
+
+	try {
+		sheets.spreadsheets.values
+			.get({
+				spreadsheetId: spreadsheetId,
+				range: range,
+			})
+			.then(response => {
+				console.log(response.data.values);
+			});
+		console.log("data captured");
+	} catch (error) {
+		console.log("Err in data capturing");
+	}
 }
