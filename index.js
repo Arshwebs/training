@@ -20,16 +20,38 @@ async function writeDataToSheet(auth) {
 
 	// Specify the spreadsheet ID and range.
 	const spreadsheetId = "1f597ZHCsCWQMpD8WjojGTc4v9iM8QXC-0Ha_x8zDWk0";
-	const range = "Sheet1!A1:E17";
+	let startingIndex = 1;
+	let endingIndex = 5;
+	let range = `Sheet1!A${startingIndex}:E${endingIndex}`;
 
 	// Specify the values to write.
 	const values = [
-		["Name", "Age"],
-		["John Doe", 30],
+		["Name", "Age", "Range"],
+		["Doegvhgvkh", 30, 5],
 	];
 
 	try {
+		sheets.spreadsheets.values
+			.get({
+				spreadsheetId: spreadsheetId,
+				range: range,
+			})
+			.then(response => {
+				startingIndex = startingIndex + response.data.values.length;
+				console.log(range);
+				console.log(response.data, response.data.values.length, startingIndex);
+			});
+		console.log("data captured");
+	} catch (error) {
+		console.log("Err in data capturing");
+	}
+
+	console.log(startingIndex);
+
+	range = `Sheet1!A${startingIndex}:E${endingIndex}`;
+	try {
 		// Write the data to the spreadsheet.
+		console.log(range);
 		const response = await sheets.spreadsheets.values.update({
 			spreadsheetId,
 			range,
@@ -42,19 +64,5 @@ async function writeDataToSheet(auth) {
 		console.log("Data written successfully.");
 	} catch (err) {
 		console.error("Error writing data:", err);
-	}
-
-	try {
-		sheets.spreadsheets.values
-			.get({
-				spreadsheetId: spreadsheetId,
-				range: range,
-			})
-			.then(response => {
-				console.log(response.data.values, response.data.values.length);
-			});
-		console.log("data captured");
-	} catch (error) {
-		console.log("Err in data capturing");
 	}
 }

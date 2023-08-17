@@ -1,5 +1,7 @@
 Set up a Google Cloud Platform (GCP) project and enable the Google Sheets API:
 
+https://developers.google.com/sheets/api/guides/concepts
+
 1. Visit the GCP Console (https://console.cloud.google.com/).
 Create a new project or select an existing one.
 Enable the Google Sheets API by navigating to the "APIs & Services" > "Library" section, searching for "Google Sheets API," and enabling it.
